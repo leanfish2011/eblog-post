@@ -84,7 +84,6 @@ public class BlogServiceImpl implements BlogService {
   public Boolean update(BlogUpdate blogUpdate) {
     Blog blog = new Blog();
     BeanUtils.copyProperties(blogUpdate, blog);
-    blog.setId(UUID.randomUUID().toString());
     blog.setModifierId(username);
 
     return blogMapper.updateByPrimaryKeySelective(blog) > 0 ? true : false;
@@ -94,6 +93,10 @@ public class BlogServiceImpl implements BlogService {
   @Override
   public BlogResp select(String id) {
     Blog blog = blogMapper.selectByPrimaryKey(id);
+    if (blog == null) {
+      return null;
+    }
+
     BlogResp blogResp = new BlogResp();
     BeanUtils.copyProperties(blog, blogResp);
 

@@ -12,14 +12,8 @@ public class BlogUpdate {
 
   private String id;
 
-  private String name;
+  private String title;
 
-  private String url;
-
-  private String remark;
-
-  private String tag;
-
-  private Integer sortNum;
+  private String content;
 
 }
