@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.tim</groupId>
     <artifactId>spring-dev-parent</artifactId>
-    <version>2.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
   </parent>
 
   <groupId>com.tim</groupId>
@@ -21,7 +21,7 @@
   </modules>
 
   <properties>
-    <dev-core.version>2.0-SNAPSHOT</dev-core.version>
+    <dev-core.version>1.0-SNAPSHOT</dev-core.version>
     <post-sdk.version>1.0-SNAPSHOT</post-sdk.version>
   </properties>
 
