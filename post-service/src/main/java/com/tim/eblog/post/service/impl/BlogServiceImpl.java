@@ -29,8 +29,8 @@ import org.springframework.util.StringUtils;
 @Slf4j
 public class BlogServiceImpl implements BlogService {
 
-  @Value("${login.admin.username:admin}")
-  private String username;
+  @Value("${login.admin.code:admin}")
+  private String userCode;
 
   @Autowired
   private BlogMapper blogMapper;
@@ -70,7 +70,7 @@ public class BlogServiceImpl implements BlogService {
     Blog blog = new Blog();
     BeanUtils.copyProperties(blogAdd, blog);
     blog.setId(UUID.randomUUID().toString());
-    blog.setCreatorId(username);
+    blog.setCreatorId(userCode);
 
     return blogMapper.insertSelective(blog) > 0 ? true : false;
   }
@@ -84,7 +84,7 @@ public class BlogServiceImpl implements BlogService {
   public Boolean update(BlogUpdate blogUpdate) {
     Blog blog = new Blog();
     BeanUtils.copyProperties(blogUpdate, blog);
-    blog.setModifierId(username);
+    blog.setModifierId(userCode);
 
     return blogMapper.updateByPrimaryKeySelective(blog) > 0 ? true : false;
 

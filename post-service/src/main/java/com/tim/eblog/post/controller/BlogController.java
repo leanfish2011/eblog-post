@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date：20-3-7 下午5:29
  * @description：
  */
-@Api(description = "博客管理")
+@Api(tags = "博客管理")
 @RestController
 @RequestMapping("${api.version.module}/blog")
 public class BlogController {
