@@ -6,12 +6,13 @@ import com.tim.eblog.post.component.TokenManager;
 import com.tim.eblog.post.exception.BadParameterException;
 import com.tim.eblog.post.exception.InvalidTokenException;
 import com.tim.eblog.post.service.AccessService;
-import com.tim.eblog.post.vo.LoginReq;
-import com.tim.eblog.post.vo.LoginResp;
-import com.tim.eblog.post.vo.TokenModel;
+import com.tim.eblog.post.vo.login.LoginReq;
+import com.tim.eblog.post.vo.login.LoginResp;
+import com.tim.eblog.post.vo.login.TokenModel;
 import com.tim.exception.type.NotFoundException;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,7 +44,8 @@ public class AccessServiceImpl implements AccessService {
     }
 
     String inputPassword = loginReq.getPassword();
-    if (!password.equals(inputPassword)) {
+    String setPasswordMd5 = DigestUtils.md5Hex(password + userCode);
+    if (!setPasswordMd5.equals(inputPassword)) {
       log.warn("密码错误，密码：{}", inputPassword);
       throw new BadParameterException("密码错误！");
     }

@@ -1,4 +1,4 @@
-package com.tim.eblog.post.vo;
+package com.tim.eblog.post.vo.login;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;

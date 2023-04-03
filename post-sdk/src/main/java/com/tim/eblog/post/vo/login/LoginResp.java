@@ -1,4 +1,4 @@
-package com.tim.eblog.post.vo;
+package com.tim.eblog.post.vo.login;
 
 import java.io.Serializable;
 import lombok.Data;
@@ -21,8 +21,4 @@ public class LoginResp implements Serializable {
    */
   private String userCode;
 
-  /**
-   * 用户名称
-   */
-  private String name;
 }
