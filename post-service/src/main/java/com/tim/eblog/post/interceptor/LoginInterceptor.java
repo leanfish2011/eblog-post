@@ -26,7 +26,7 @@ public class LoginInterceptor implements HandlerInterceptor {
       Object handler) {
     //针对博客查看接口，不拦截
     if (request.getRequestURI().contains("/blog") && request.getMethod()
-        .equals(RequestMethod.GET)) {
+        .equals(RequestMethod.GET.name())) {
       return true;
     }
 
