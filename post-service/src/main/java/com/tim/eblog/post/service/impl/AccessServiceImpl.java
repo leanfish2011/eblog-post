@@ -3,6 +3,7 @@ package com.tim.eblog.post.service.impl;
 import com.tim.eblog.post.ao.User;
 import com.tim.eblog.post.component.RequestManager;
 import com.tim.eblog.post.component.TokenManager;
+import com.tim.eblog.post.config.AuthCode;
 import com.tim.eblog.post.exception.BadParameterException;
 import com.tim.eblog.post.exception.InvalidTokenException;
 import com.tim.eblog.post.service.AccessService;
@@ -96,7 +97,7 @@ public class AccessServiceImpl implements AccessService {
     boolean isExist = tokenManager.checkToken(token);
     if (!isExist) {
       log.warn("token无效，为空或不存在，token:{}", token);
-      throw new InvalidTokenException("登录信息失效！");
+      throw new InvalidTokenException(AuthCode.INVALIDTOKEN_MSG);
     }
 
     return true;

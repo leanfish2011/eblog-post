@@ -7,7 +7,7 @@ import com.tim.eblog.post.vo.blog.BlogUpdate;
 
 public interface BlogService {
 
-  BlogSearchData search(String input);
+  BlogSearchData search(String title);
 
   Boolean add(BlogAdd blogAdd);
 

@@ -57,7 +57,7 @@ public class BlogController {
 
   @ApiOperation(value = "查询博客列表")
   @RequestMapping(method = RequestMethod.GET)
-  public Message<BlogSearchData> search(String input) {
-    return Message.success(blogService.search(input));
+  public Message<BlogSearchData> search(String title) {
+    return Message.success(blogService.search(title));
   }
 }

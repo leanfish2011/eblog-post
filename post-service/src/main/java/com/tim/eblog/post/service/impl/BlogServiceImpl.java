@@ -36,12 +36,12 @@ public class BlogServiceImpl implements BlogService {
   private BlogMapper blogMapper;
 
   @Override
-  public BlogSearchData search(String input) {
+  public BlogSearchData search(String title) {
     BlogExample blogExample = new BlogExample();
     Criteria criteria = blogExample.createCriteria();
 
-    if (!StringUtils.isEmpty(input)) {
-      criteria.andTitleLike("%" + input + "%");
+    if (!StringUtils.isEmpty(title)) {
+      criteria.andTitleLike("%" + title + "%");
     }
 
     blogExample.setOrderByClause(" create_time desc");
