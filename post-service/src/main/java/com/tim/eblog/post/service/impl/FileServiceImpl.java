@@ -29,10 +29,13 @@ public class FileServiceImpl implements FileService {
   @Value("#{'${file.allow.suffix:gif,png,jpg,jpeg,bpm,svg}'.split(',')}")
   private List<String> suffixList;
 
+  @Value("${file.suffix.path:/img}")
+  private String suffixPath;
+
   @Override
   public FileResp upload(CommonsMultipartFile multipartFile) {
     fileCheck(multipartFile);
-    String path = "";
+    String path = suffixPath;
     String originalFilename = multipartFile.getOriginalFilename();
     String suffix = Objects.requireNonNull(originalFilename)
         .substring(originalFilename.lastIndexOf("."));
@@ -46,7 +49,7 @@ public class FileServiceImpl implements FileService {
 
     try {
       multipartFile.transferTo(file);
-      path = "/" + fileName;
+      path = path + "/" + fileName;
     } catch (IOException e) {
       log.error(e.toString());
       throw new BadParameterException("文件上传失败");
