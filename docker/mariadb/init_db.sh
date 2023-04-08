@@ -18,11 +18,19 @@ log "all databases:"$databases
 
 log "need dump databases:"$need_dump_database;
 
-# 导出库
-time=$(date "+%Y%m%d_%H%M%S");
-mysqldump -uroot -p$MYSQL_ROOT_PASSWORD -h127.0.0.1 --databases $need_dump_database > $backup_path/$need_dump_database"_"$time.sql;
+result=$(echo $databases | grep "${need_dump_database}")
+if [[ "$result" != "" ]]
+then
+  # 导出库
+  log "开始备份数据库"
 
-log "数据库备份完成！"
+  time=$(date "+%Y%m%d_%H%M%S");
+  mysqldump -uroot -p$MYSQL_ROOT_PASSWORD -h127.0.0.1 --databases $need_dump_database > $backup_path/$need_dump_database"_"$time.sql;
+
+  log "数据库备份完成！"
+else
+  log "要备份的数据库未创建"
+fi
 
 #################### 2、执行sql ####################
 # 指明sql脚本所在目录
