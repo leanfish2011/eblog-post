@@ -23,6 +23,7 @@
   <properties>
     <dev-core.version>1.0-SNAPSHOT</dev-core.version>
     <post-sdk.version>1.0-SNAPSHOT</post-sdk.version>
+    <commons-codec.version>1.14</commons-codec.version>
   </properties>
 
   <dependencyManagement>
@@ -38,6 +39,12 @@
         <groupId>com.tim</groupId>
         <artifactId>post-sdk</artifactId>
         <version>${post-sdk.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>${commons-codec.version}</version>
       </dependency>
 
     </dependencies>

@@ -1,8 +1,8 @@
 package com.tim.eblog.post.component;
 
 import com.tim.eblog.post.util.ExpiryMap;
-import com.tim.eblog.post.vo.LoginResp;
-import com.tim.eblog.post.vo.TokenModel;
+import com.tim.eblog.post.vo.login.LoginResp;
+import com.tim.eblog.post.vo.login.TokenModel;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

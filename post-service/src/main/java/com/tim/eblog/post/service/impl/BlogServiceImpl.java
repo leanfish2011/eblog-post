@@ -5,11 +5,11 @@ import com.tim.eblog.post.po.Blog;
 import com.tim.eblog.post.po.BlogExample;
 import com.tim.eblog.post.po.BlogExample.Criteria;
 import com.tim.eblog.post.service.BlogService;
-import com.tim.eblog.post.vo.BlogAdd;
-import com.tim.eblog.post.vo.BlogResp;
-import com.tim.eblog.post.vo.BlogSearchData;
-import com.tim.eblog.post.vo.BlogSearchResp;
-import com.tim.eblog.post.vo.BlogUpdate;
+import com.tim.eblog.post.vo.blog.BlogAdd;
+import com.tim.eblog.post.vo.blog.BlogResp;
+import com.tim.eblog.post.vo.blog.BlogSearchData;
+import com.tim.eblog.post.vo.blog.BlogSearchResp;
+import com.tim.eblog.post.vo.blog.BlogUpdate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -36,12 +36,12 @@ public class BlogServiceImpl implements BlogService {
   private BlogMapper blogMapper;
 
   @Override
-  public BlogSearchData search(String input) {
+  public BlogSearchData search(String title) {
     BlogExample blogExample = new BlogExample();
     Criteria criteria = blogExample.createCriteria();
 
-    if (!StringUtils.isEmpty(input)) {
-      criteria.andTitleLike("%" + input + "%");
+    if (!StringUtils.isEmpty(title)) {
+      criteria.andTitleLike("%" + title + "%");
     }
 
     blogExample.setOrderByClause(" create_time desc");

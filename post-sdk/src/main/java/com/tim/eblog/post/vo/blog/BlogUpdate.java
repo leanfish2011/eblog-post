@@ -1,14 +1,16 @@
-package com.tim.eblog.post.vo;
+package com.tim.eblog.post.vo.blog;
 
 import lombok.Data;
 
 /**
  * @author：tim
  * @date：20-3-7 下午9:05
- * @description：博客创建
+ * @description：
  */
 @Data
-public class BlogAdd {
+public class BlogUpdate {
+
+  private String id;
 
   private String title;
 

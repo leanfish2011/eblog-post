@@ -1,8 +1,8 @@
 package com.tim.eblog.post.service;
 
-import com.tim.eblog.post.vo.LoginReq;
-import com.tim.eblog.post.vo.LoginResp;
-import com.tim.eblog.post.vo.TokenModel;
+import com.tim.eblog.post.vo.login.LoginReq;
+import com.tim.eblog.post.vo.login.LoginResp;
+import com.tim.eblog.post.vo.login.TokenModel;
 
 public interface AccessService {
 

@@ -1,10 +1,10 @@
-package com.tim.eblog.post.vo;
+package com.tim.eblog.post.vo.blog;
 
 import java.util.Date;
 import lombok.Data;
 
 @Data
-public class BlogSearchResp {
+public class BlogResp {
 
   private String id;
 
@@ -25,4 +25,5 @@ public class BlogSearchResp {
   private Integer readCount;
 
   private Integer suggestCount;
+
 }

@@ -1,9 +1,9 @@
 package com.tim.eblog.post.controller;
 
 import com.tim.eblog.post.service.AccessService;
-import com.tim.eblog.post.vo.LoginReq;
-import com.tim.eblog.post.vo.LoginResp;
-import com.tim.eblog.post.vo.TokenModel;
+import com.tim.eblog.post.vo.login.LoginReq;
+import com.tim.eblog.post.vo.login.LoginResp;
+import com.tim.eblog.post.vo.login.TokenModel;
 import com.tim.message.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
