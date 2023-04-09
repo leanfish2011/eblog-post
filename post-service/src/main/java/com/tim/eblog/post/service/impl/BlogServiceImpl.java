@@ -72,7 +72,8 @@ public class BlogServiceImpl implements BlogService {
     BeanUtils.copyProperties(blogAdd, blog);
     blog.setId(UUID.randomUUID().toString());
     blog.setCreatorId(userCode);
-    blog.setRemark(HtmlUtil.delHtmlTags(blogAdd.getContent()).substring(0, 255));
+    blog.setRemark(HtmlUtil.delHtmlTags(blogAdd.getContent()));
+    blog.setRemark(getRemarkTip(blog.getRemark()));
 
     return blogMapper.insertSelective(blog) > 0 ? true : false;
   }
@@ -87,7 +88,8 @@ public class BlogServiceImpl implements BlogService {
     Blog blog = new Blog();
     BeanUtils.copyProperties(blogUpdate, blog);
     blog.setModifierId(userCode);
-    blog.setRemark(HtmlUtil.delHtmlTags(blogUpdate.getContent()).substring(0, 255));
+    blog.setRemark(HtmlUtil.delHtmlTags(blogUpdate.getContent()));
+    blog.setRemark(getRemarkTip(blog.getRemark()));
 
     return blogMapper.updateByPrimaryKeySelective(blog) > 0 ? true : false;
 
@@ -104,5 +106,9 @@ public class BlogServiceImpl implements BlogService {
     BeanUtils.copyProperties(blog, blogResp);
 
     return blogResp;
+  }
+
+  private String getRemarkTip(String remark) {
+    return remark.length() > 255 ? remark.substring(0, 255) : remark;
   }
 }
