@@ -16,13 +16,15 @@ public class Blog {
 
   private String title;
 
-  private String content;
-
   private Integer comCount;
 
   private Integer readCount;
 
   private Integer suggestCount;
+
+  private String remark;
+
+  private String content;
 
   public String getId() {
     return id;
@@ -72,14 +74,6 @@ public class Blog {
     this.title = title == null ? null : title.trim();
   }
 
-  public String getContent() {
-    return content;
-  }
-
-  public void setContent(String content) {
-    this.content = content == null ? null : content.trim();
-  }
-
   public Integer getComCount() {
     return comCount;
   }
@@ -102,5 +96,21 @@ public class Blog {
 
   public void setSuggestCount(Integer suggestCount) {
     this.suggestCount = suggestCount;
+  }
+
+  public String getRemark() {
+    return remark;
+  }
+
+  public void setRemark(String remark) {
+    this.remark = remark == null ? null : remark.trim();
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content == null ? null : content.trim();
   }
 }

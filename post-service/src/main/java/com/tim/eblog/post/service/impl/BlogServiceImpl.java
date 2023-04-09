@@ -5,6 +5,7 @@ import com.tim.eblog.post.po.Blog;
 import com.tim.eblog.post.po.BlogExample;
 import com.tim.eblog.post.po.BlogExample.Criteria;
 import com.tim.eblog.post.service.BlogService;
+import com.tim.eblog.post.util.HtmlUtil;
 import com.tim.eblog.post.vo.blog.BlogAdd;
 import com.tim.eblog.post.vo.blog.BlogResp;
 import com.tim.eblog.post.vo.blog.BlogSearchData;
@@ -71,6 +72,7 @@ public class BlogServiceImpl implements BlogService {
     BeanUtils.copyProperties(blogAdd, blog);
     blog.setId(UUID.randomUUID().toString());
     blog.setCreatorId(userCode);
+    blog.setRemark(HtmlUtil.delHtmlTags(blogAdd.getContent()).substring(0, 255));
 
     return blogMapper.insertSelective(blog) > 0 ? true : false;
   }
@@ -85,6 +87,7 @@ public class BlogServiceImpl implements BlogService {
     Blog blog = new Blog();
     BeanUtils.copyProperties(blogUpdate, blog);
     blog.setModifierId(userCode);
+    blog.setRemark(HtmlUtil.delHtmlTags(blogUpdate.getContent()).substring(0, 255));
 
     return blogMapper.updateByPrimaryKeySelective(blog) > 0 ? true : false;
 

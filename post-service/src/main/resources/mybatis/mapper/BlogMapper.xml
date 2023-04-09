@@ -9,10 +9,13 @@
     <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP"/>
     <result column="modifier_id" property="modifierId" jdbcType="VARCHAR"/>
     <result column="title" property="title" jdbcType="VARCHAR"/>
-    <result column="content" property="content" jdbcType="VARCHAR"/>
     <result column="com_count" property="comCount" jdbcType="INTEGER"/>
     <result column="read_count" property="readCount" jdbcType="INTEGER"/>
     <result column="suggest_count" property="suggestCount" jdbcType="INTEGER"/>
+    <result column="remark" property="remark" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tim.eblog.post.po.Blog" extends="BaseResultMap">
+    <result column="content" property="content" jdbcType="LONGVARCHAR"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,9 +79,30 @@
   </sql>
   <sql id="Base_Column_List">
     id
-    , create_time, creator_id, modified_time, modifier_id, title, content, com_count,
-    read_count, suggest_count
+    , create_time, creator_id, modified_time, modifier_id, title, com_count, read_count,
+    suggest_count, remark
   </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs"
+    parameterType="com.tim.eblog.post.po.BlogExample">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from blog
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap"
     parameterType="com.tim.eblog.post.po.BlogExample">
     select
@@ -95,9 +119,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
     select
     <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
     from blog
     where id = #{id,jdbcType=VARCHAR}
   </select>
@@ -115,14 +141,14 @@
   <insert id="insert" parameterType="com.tim.eblog.post.po.Blog">
     insert into blog (id, create_time, creator_id,
                       modified_time, modifier_id, title,
-                      content, com_count, read_count,
-                      suggest_count)
+                      com_count, read_count, suggest_count,
+                      remark, content)
     values (#{id,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=VARCHAR},
             #{modifiedTime,jdbcType=TIMESTAMP}, #{modifierId,jdbcType=VARCHAR},
             #{title,jdbcType=VARCHAR},
-            #{content,jdbcType=VARCHAR}, #{comCount,jdbcType=INTEGER},
-            #{readCount,jdbcType=INTEGER},
-            #{suggestCount,jdbcType=INTEGER})
+            #{comCount,jdbcType=INTEGER}, #{readCount,jdbcType=INTEGER},
+            #{suggestCount,jdbcType=INTEGER},
+            #{remark,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.tim.eblog.post.po.Blog">
     insert into blog
@@ -145,9 +171,6 @@
       <if test="title != null">
         title,
       </if>
-      <if test="content != null">
-        content,
-      </if>
       <if test="comCount != null">
         com_count,
       </if>
@@ -156,6 +179,12 @@
       </if>
       <if test="suggestCount != null">
         suggest_count,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="content != null">
+        content,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -177,9 +206,6 @@
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
       <if test="comCount != null">
         #{comCount,jdbcType=INTEGER},
       </if>
@@ -188,6 +214,12 @@
       </if>
       <if test="suggestCount != null">
         #{suggestCount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -219,9 +251,6 @@
       <if test="record.title != null">
         title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
-      </if>
       <if test="record.comCount != null">
         com_count = #{record.comCount,jdbcType=INTEGER},
       </if>
@@ -231,7 +260,30 @@
       <if test="record.suggestCount != null">
         suggest_count = #{record.suggestCount,jdbcType=INTEGER},
       </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update blog
+    set id = #{record.id,jdbcType=VARCHAR},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    creator_id = #{record.creatorId,jdbcType=VARCHAR},
+    modified_time = #{record.modifiedTime,jdbcType=TIMESTAMP},
+    modifier_id = #{record.modifierId,jdbcType=VARCHAR},
+    title = #{record.title,jdbcType=VARCHAR},
+    com_count = #{record.comCount,jdbcType=INTEGER},
+    read_count = #{record.readCount,jdbcType=INTEGER},
+    suggest_count = #{record.suggestCount,jdbcType=INTEGER},
+    remark = #{record.remark,jdbcType=VARCHAR},
+    content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause"/>
     </if>
@@ -244,10 +296,10 @@
     modified_time = #{record.modifiedTime,jdbcType=TIMESTAMP},
     modifier_id = #{record.modifierId,jdbcType=VARCHAR},
     title = #{record.title,jdbcType=VARCHAR},
-    content = #{record.content,jdbcType=VARCHAR},
     com_count = #{record.comCount,jdbcType=INTEGER},
     read_count = #{record.readCount,jdbcType=INTEGER},
-    suggest_count = #{record.suggestCount,jdbcType=INTEGER}
+    suggest_count = #{record.suggestCount,jdbcType=INTEGER},
+    remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause"/>
     </if>
@@ -270,9 +322,6 @@
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
-      </if>
       <if test="comCount != null">
         com_count = #{comCount,jdbcType=INTEGER},
       </if>
@@ -282,7 +331,27 @@
       <if test="suggestCount != null">
         suggest_count = #{suggestCount,jdbcType=INTEGER},
       </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tim.eblog.post.po.Blog">
+    update blog
+    set create_time   = #{createTime,jdbcType=TIMESTAMP},
+        creator_id    = #{creatorId,jdbcType=VARCHAR},
+        modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
+        modifier_id   = #{modifierId,jdbcType=VARCHAR},
+        title         = #{title,jdbcType=VARCHAR},
+        com_count     = #{comCount,jdbcType=INTEGER},
+        read_count    = #{readCount,jdbcType=INTEGER},
+        suggest_count = #{suggestCount,jdbcType=INTEGER},
+        remark        = #{remark,jdbcType=VARCHAR},
+        content       = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.tim.eblog.post.po.Blog">
@@ -292,10 +361,10 @@
         modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
         modifier_id   = #{modifierId,jdbcType=VARCHAR},
         title         = #{title,jdbcType=VARCHAR},
-        content       = #{content,jdbcType=VARCHAR},
         com_count     = #{comCount,jdbcType=INTEGER},
         read_count    = #{readCount,jdbcType=INTEGER},
-        suggest_count = #{suggestCount,jdbcType=INTEGER}
+        suggest_count = #{suggestCount,jdbcType=INTEGER},
+        remark        = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

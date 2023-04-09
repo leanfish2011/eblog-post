@@ -18,7 +18,7 @@ public class BlogSearchResp {
 
   private String title;
 
-  private String content;
+  private String remark;
 
   private Integer comCount;
 
