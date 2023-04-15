@@ -6,6 +6,10 @@ import com.tim.eblog.post.po.BlogExample;
 import com.tim.eblog.post.po.BlogExample.Criteria;
 import com.tim.eblog.post.service.BlogService;
 import com.tim.eblog.post.util.HtmlUtil;
+import com.tim.eblog.post.vo.blog.Archive;
+import com.tim.eblog.post.vo.blog.ArchiveData;
+import com.tim.eblog.post.vo.blog.ArchiveSum;
+import com.tim.eblog.post.vo.blog.ArchiveSumData;
 import com.tim.eblog.post.vo.blog.BlogAdd;
 import com.tim.eblog.post.vo.blog.BlogResp;
 import com.tim.eblog.post.vo.blog.BlogSearchData;
@@ -120,6 +124,24 @@ public class BlogServiceImpl implements BlogService {
     blogResp.setArrayTag(getTagArray(blog.getTag()));
 
     return blogResp;
+  }
+
+  @Override
+  public ArchiveSumData selectArchiveSum() {
+    List<ArchiveSum> archiveSumList = blogMapper.selectArchiveSum();
+    ArchiveSumData archiveSumData = new ArchiveSumData();
+    archiveSumData.setArchiveSumList(archiveSumList);
+
+    return archiveSumData;
+  }
+
+  @Override
+  public ArchiveData selectArchiveByYear(String year) {
+    List<Archive> archiveList = blogMapper.selectArchiveByYear(year);
+    ArchiveData archiveData = new ArchiveData();
+    archiveData.setArchiveList(archiveList);
+
+    return archiveData;
   }
 
   private String getRemarkTip(String remark) {

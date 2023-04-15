@@ -2,6 +2,8 @@ package com.tim.eblog.post.dao;
 
 import com.tim.eblog.post.po.Blog;
 import com.tim.eblog.post.po.BlogExample;
+import com.tim.eblog.post.vo.blog.Archive;
+import com.tim.eblog.post.vo.blog.ArchiveSum;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -34,4 +36,9 @@ public interface BlogMapper {
   int updateByPrimaryKeyWithBLOBs(Blog record);
 
   int updateByPrimaryKey(Blog record);
+
+  List<ArchiveSum> selectArchiveSum();
+
+  List<Archive> selectArchiveByYear(@Param("year") String year);
+
 }

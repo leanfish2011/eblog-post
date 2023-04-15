@@ -1,6 +1,8 @@
 package com.tim.eblog.post.controller;
 
 import com.tim.eblog.post.service.BlogService;
+import com.tim.eblog.post.vo.blog.ArchiveData;
+import com.tim.eblog.post.vo.blog.ArchiveSumData;
 import com.tim.eblog.post.vo.blog.BlogAdd;
 import com.tim.eblog.post.vo.blog.BlogResp;
 import com.tim.eblog.post.vo.blog.BlogSearchData;
@@ -62,4 +64,17 @@ public class BlogController {
   public Message<BlogSearchData> search(@Valid BlogSearchReq blogSearchReq) {
     return Message.success(blogService.search(blogSearchReq));
   }
+
+  @ApiOperation(value = "查看归档总揽")
+  @RequestMapping(value = "/archive", method = RequestMethod.GET)
+  public Message<ArchiveSumData> selectArchiveSum() {
+    return Message.success(blogService.selectArchiveSum());
+  }
+
+  @ApiOperation(value = "按年份查看归档详情")
+  @RequestMapping(value = "/archive/{year}", method = RequestMethod.GET)
+  public Message<ArchiveData> selectArchiveByYear(@PathVariable String year) {
+    return Message.success(blogService.selectArchiveByYear(year));
+  }
+
 }
