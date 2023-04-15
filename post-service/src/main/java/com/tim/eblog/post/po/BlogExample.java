@@ -12,6 +12,8 @@ public class BlogExample {
 
   protected List<Criteria> oredCriteria;
 
+  protected String limitRange;
+
   public BlogExample() {
     oredCriteria = new ArrayList<Criteria>();
   }
@@ -22,6 +24,14 @@ public class BlogExample {
 
   public String getOrderByClause() {
     return orderByClause;
+  }
+
+  public String getLimitRange() {
+    return limitRange;
+  }
+
+  public void setLimitRange(String limitRange) {
+    this.limitRange = limitRange;
   }
 
   public void setDistinct(boolean distinct) {

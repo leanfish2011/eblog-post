@@ -4,10 +4,12 @@ import com.tim.eblog.post.service.BlogService;
 import com.tim.eblog.post.vo.blog.BlogAdd;
 import com.tim.eblog.post.vo.blog.BlogResp;
 import com.tim.eblog.post.vo.blog.BlogSearchData;
+import com.tim.eblog.post.vo.blog.BlogSearchReq;
 import com.tim.eblog.post.vo.blog.BlogUpdate;
 import com.tim.message.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,7 +59,7 @@ public class BlogController {
 
   @ApiOperation(value = "查询博客列表")
   @RequestMapping(method = RequestMethod.GET)
-  public Message<BlogSearchData> search(String title) {
-    return Message.success(blogService.search(title));
+  public Message<BlogSearchData> search(@Valid BlogSearchReq blogSearchReq) {
+    return Message.success(blogService.search(blogSearchReq));
   }
 }

@@ -9,6 +9,7 @@ import com.tim.eblog.post.util.HtmlUtil;
 import com.tim.eblog.post.vo.blog.BlogAdd;
 import com.tim.eblog.post.vo.blog.BlogResp;
 import com.tim.eblog.post.vo.blog.BlogSearchData;
+import com.tim.eblog.post.vo.blog.BlogSearchReq;
 import com.tim.eblog.post.vo.blog.BlogSearchResp;
 import com.tim.eblog.post.vo.blog.BlogUpdate;
 import java.util.ArrayList;
@@ -38,15 +39,22 @@ public class BlogServiceImpl implements BlogService {
   private BlogMapper blogMapper;
 
   @Override
-  public BlogSearchData search(String title) {
+  public BlogSearchData search(BlogSearchReq blogSearchReq) {
     BlogExample blogExample = new BlogExample();
     Criteria criteria = blogExample.createCriteria();
 
-    if (!StringUtils.isEmpty(title)) {
-      criteria.andTitleLike("%" + title + "%");
+    if (!StringUtils.isEmpty(blogSearchReq.getTitle())) {
+      criteria.andTitleLike("%" + blogSearchReq.getTitle() + "%");
     }
 
+    int allTotal = blogMapper.countByExample(blogExample);
+
     blogExample.setOrderByClause(" create_time desc");
+    Integer pageNo = blogSearchReq.getPageNo();
+    Integer pageSize = blogSearchReq.getPageSize();
+    if (pageNo != null && pageSize != null) {
+      blogExample.setLimitRange((pageNo - 1) * pageSize + "," + pageSize);
+    }
 
     List<Blog> blogList = blogMapper.selectByExample(blogExample);
     List<BlogSearchResp> list = new ArrayList<>();
@@ -58,8 +66,6 @@ public class BlogServiceImpl implements BlogService {
 
       list.add(blogSearchResp);
     }
-
-    int allTotal = blogMapper.countByExample(blogExample);
 
     BlogSearchData blogSearchData = new BlogSearchData();
     blogSearchData.setAllTotal(allTotal);
