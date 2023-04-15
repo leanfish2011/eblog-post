@@ -125,7 +125,7 @@ public class BlogServiceImpl implements BlogService {
   }
 
   private String[] getTagArray(String tag) {
-    return StringUtils.split(tag, ",");
+    return StringUtils.delimitedListToStringArray(tag, ",");
   }
 
 }
