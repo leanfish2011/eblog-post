@@ -16,4 +16,5 @@ public class BlogUpdate {
 
   private String content;
 
+  private String [] arrayTag;
 }

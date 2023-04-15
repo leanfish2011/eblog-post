@@ -16,13 +16,11 @@ public class Blog {
 
   private String title;
 
-  private Integer comCount;
-
   private Integer readCount;
 
-  private Integer suggestCount;
-
   private String remark;
+
+  private String tag;
 
   private String content;
 
@@ -74,14 +72,6 @@ public class Blog {
     this.title = title == null ? null : title.trim();
   }
 
-  public Integer getComCount() {
-    return comCount;
-  }
-
-  public void setComCount(Integer comCount) {
-    this.comCount = comCount;
-  }
-
   public Integer getReadCount() {
     return readCount;
   }
@@ -90,20 +80,20 @@ public class Blog {
     this.readCount = readCount;
   }
 
-  public Integer getSuggestCount() {
-    return suggestCount;
-  }
-
-  public void setSuggestCount(Integer suggestCount) {
-    this.suggestCount = suggestCount;
-  }
-
   public String getRemark() {
     return remark;
   }
 
   public void setRemark(String remark) {
     this.remark = remark == null ? null : remark.trim();
+  }
+
+  public String getTag() {
+    return tag;
+  }
+
+  public void setTag(String tag) {
+    this.tag = tag == null ? null : tag.trim();
   }
 
   public String getContent() {

@@ -18,12 +18,12 @@ public class BlogResp {
 
   private String title;
 
-  private String content;
-
-  private Integer comCount;
-
   private Integer readCount;
 
-  private Integer suggestCount;
+  private String remark;
+
+  private String [] arrayTag;
+
+  private String content;
 
 }

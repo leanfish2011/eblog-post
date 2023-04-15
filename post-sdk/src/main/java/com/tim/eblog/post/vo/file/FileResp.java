@@ -11,6 +11,8 @@ import lombok.Data;
 public class FileResp {
 
   private boolean uploaded;
+
   private String filename;
+
   private String url;
 }

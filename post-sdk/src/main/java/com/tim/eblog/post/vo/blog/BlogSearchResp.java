@@ -18,11 +18,11 @@ public class BlogSearchResp {
 
   private String title;
 
-  private String remark;
-
-  private Integer comCount;
-
   private Integer readCount;
 
-  private Integer suggestCount;
+  private String remark;
+
+  private String [] arrayTag;
+
+  private String content;
 }

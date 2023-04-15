@@ -507,66 +507,6 @@ public class BlogExample {
       return (Criteria) this;
     }
 
-    public Criteria andComCountIsNull() {
-      addCriterion("com_count is null");
-      return (Criteria) this;
-    }
-
-    public Criteria andComCountIsNotNull() {
-      addCriterion("com_count is not null");
-      return (Criteria) this;
-    }
-
-    public Criteria andComCountEqualTo(Integer value) {
-      addCriterion("com_count =", value, "comCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andComCountNotEqualTo(Integer value) {
-      addCriterion("com_count <>", value, "comCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andComCountGreaterThan(Integer value) {
-      addCriterion("com_count >", value, "comCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andComCountGreaterThanOrEqualTo(Integer value) {
-      addCriterion("com_count >=", value, "comCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andComCountLessThan(Integer value) {
-      addCriterion("com_count <", value, "comCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andComCountLessThanOrEqualTo(Integer value) {
-      addCriterion("com_count <=", value, "comCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andComCountIn(List<Integer> values) {
-      addCriterion("com_count in", values, "comCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andComCountNotIn(List<Integer> values) {
-      addCriterion("com_count not in", values, "comCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andComCountBetween(Integer value1, Integer value2) {
-      addCriterion("com_count between", value1, value2, "comCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andComCountNotBetween(Integer value1, Integer value2) {
-      addCriterion("com_count not between", value1, value2, "comCount");
-      return (Criteria) this;
-    }
-
     public Criteria andReadCountIsNull() {
       addCriterion("read_count is null");
       return (Criteria) this;
@@ -624,66 +564,6 @@ public class BlogExample {
 
     public Criteria andReadCountNotBetween(Integer value1, Integer value2) {
       addCriterion("read_count not between", value1, value2, "readCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andSuggestCountIsNull() {
-      addCriterion("suggest_count is null");
-      return (Criteria) this;
-    }
-
-    public Criteria andSuggestCountIsNotNull() {
-      addCriterion("suggest_count is not null");
-      return (Criteria) this;
-    }
-
-    public Criteria andSuggestCountEqualTo(Integer value) {
-      addCriterion("suggest_count =", value, "suggestCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andSuggestCountNotEqualTo(Integer value) {
-      addCriterion("suggest_count <>", value, "suggestCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andSuggestCountGreaterThan(Integer value) {
-      addCriterion("suggest_count >", value, "suggestCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andSuggestCountGreaterThanOrEqualTo(Integer value) {
-      addCriterion("suggest_count >=", value, "suggestCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andSuggestCountLessThan(Integer value) {
-      addCriterion("suggest_count <", value, "suggestCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andSuggestCountLessThanOrEqualTo(Integer value) {
-      addCriterion("suggest_count <=", value, "suggestCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andSuggestCountIn(List<Integer> values) {
-      addCriterion("suggest_count in", values, "suggestCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andSuggestCountNotIn(List<Integer> values) {
-      addCriterion("suggest_count not in", values, "suggestCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andSuggestCountBetween(Integer value1, Integer value2) {
-      addCriterion("suggest_count between", value1, value2, "suggestCount");
-      return (Criteria) this;
-    }
-
-    public Criteria andSuggestCountNotBetween(Integer value1, Integer value2) {
-      addCriterion("suggest_count not between", value1, value2, "suggestCount");
       return (Criteria) this;
     }
 
@@ -754,6 +634,76 @@ public class BlogExample {
 
     public Criteria andRemarkNotBetween(String value1, String value2) {
       addCriterion("remark not between", value1, value2, "remark");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagIsNull() {
+      addCriterion("tag is null");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagIsNotNull() {
+      addCriterion("tag is not null");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagEqualTo(String value) {
+      addCriterion("tag =", value, "tag");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagNotEqualTo(String value) {
+      addCriterion("tag <>", value, "tag");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagGreaterThan(String value) {
+      addCriterion("tag >", value, "tag");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagGreaterThanOrEqualTo(String value) {
+      addCriterion("tag >=", value, "tag");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagLessThan(String value) {
+      addCriterion("tag <", value, "tag");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagLessThanOrEqualTo(String value) {
+      addCriterion("tag <=", value, "tag");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagLike(String value) {
+      addCriterion("tag like", value, "tag");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagNotLike(String value) {
+      addCriterion("tag not like", value, "tag");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagIn(List<String> values) {
+      addCriterion("tag in", values, "tag");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagNotIn(List<String> values) {
+      addCriterion("tag not in", values, "tag");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagBetween(String value1, String value2) {
+      addCriterion("tag between", value1, value2, "tag");
+      return (Criteria) this;
+    }
+
+    public Criteria andTagNotBetween(String value1, String value2) {
+      addCriterion("tag not between", value1, value2, "tag");
       return (Criteria) this;
     }
   }

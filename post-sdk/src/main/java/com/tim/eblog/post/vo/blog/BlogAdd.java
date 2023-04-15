@@ -14,4 +14,6 @@ public class BlogAdd {
 
   private String content;
 
+  private String [] arrayTag;
+
 }

@@ -14,9 +14,8 @@ CREATE TABLE `blog` (
     `modifier_id` varchar(60) DEFAULT NULL COMMENT '修改人id',
     `title` varchar(100) DEFAULT NULL COMMENT '博客标题',
     `content` mediumtext DEFAULT NULL COMMENT '博客内容',
-    `com_count` int(11) DEFAULT 0 COMMENT '博客被评论条数',
-    `read_count` int(11) DEFAULT 0 COMMENT '博客被阅读条数',
-    `suggest_count` int(11) DEFAULT 0 COMMENT '博客被推荐次数',
+    `read_count` int(11) DEFAULT 0 COMMENT '博客被阅读次数',
     `remark` varchar(255) DEFAULT NULL COMMENT '博客摘要',
+    `tag` varchar(100) DEFAULT NULL COMMENT '标签',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客';

@@ -12,6 +12,7 @@ import com.tim.eblog.post.vo.blog.BlogSearchData;
 import com.tim.eblog.post.vo.blog.BlogSearchResp;
 import com.tim.eblog.post.vo.blog.BlogUpdate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +54,8 @@ public class BlogServiceImpl implements BlogService {
       BlogSearchResp blogSearchResp = new BlogSearchResp();
       BeanUtils.copyProperties(blog, blogSearchResp);
 
+      blogSearchResp.setArrayTag(getTagArray(blog.getTag()));
+
       list.add(blogSearchResp);
     }
 
@@ -70,6 +73,8 @@ public class BlogServiceImpl implements BlogService {
   public Boolean add(BlogAdd blogAdd) {
     Blog blog = new Blog();
     BeanUtils.copyProperties(blogAdd, blog);
+
+    blog.setTag(getTagStr(blogAdd.getArrayTag()));
     blog.setId(UUID.randomUUID().toString());
     blog.setCreatorId(userCode);
     blog.setRemark(HtmlUtil.delHtmlTags(blogAdd.getContent()));
@@ -87,12 +92,13 @@ public class BlogServiceImpl implements BlogService {
   public Boolean update(BlogUpdate blogUpdate) {
     Blog blog = new Blog();
     BeanUtils.copyProperties(blogUpdate, blog);
+
+    blog.setTag(getTagStr(blogUpdate.getArrayTag()));
     blog.setModifierId(userCode);
     blog.setRemark(HtmlUtil.delHtmlTags(blogUpdate.getContent()));
     blog.setRemark(getRemarkTip(blog.getRemark()));
 
     return blogMapper.updateByPrimaryKeySelective(blog) > 0 ? true : false;
-
   }
 
   @Override
@@ -105,10 +111,21 @@ public class BlogServiceImpl implements BlogService {
     BlogResp blogResp = new BlogResp();
     BeanUtils.copyProperties(blog, blogResp);
 
+    blogResp.setArrayTag(getTagArray(blog.getTag()));
+
     return blogResp;
   }
 
   private String getRemarkTip(String remark) {
     return remark.length() > 255 ? remark.substring(0, 255) : remark;
   }
+
+  private String getTagStr(String[] arrayTag) {
+    return StringUtils.collectionToDelimitedString(Arrays.asList(arrayTag), ",");
+  }
+
+  private String[] getTagArray(String tag) {
+    return StringUtils.split(tag, ",");
+  }
+
 }
