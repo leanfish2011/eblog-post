@@ -30,6 +30,12 @@ public class LoginInterceptor implements HandlerInterceptor {
       return true;
     }
 
+    //针对数据字典查看接口，不拦截
+    if (request.getRequestURI().contains("/dict") && request.getMethod()
+        .equals(RequestMethod.GET.name())) {
+      return true;
+    }
+
     //除了配置文件中不包含接口，其他接口都要检查token是否有效
     return accessService.check();
   }

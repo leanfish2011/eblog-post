@@ -1,33 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tim.eblog.post.dao.BlogMapper">
+<mapper namespace="com.tim.eblog.post.dao.DictMapper">
 
-  <resultMap id="BaseResultMap" type="com.tim.eblog.post.po.Blog">
-    <id column="id" property="id" jdbcType="VARCHAR"/>
+  <resultMap id="BaseResultMap" type="com.tim.eblog.post.po.Dict">
+    <id column="title" property="title" jdbcType="VARCHAR"/>
+    <result column="id" property="id" jdbcType="VARCHAR"/>
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     <result column="creator_id" property="creatorId" jdbcType="VARCHAR"/>
     <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP"/>
     <result column="modifier_id" property="modifierId" jdbcType="VARCHAR"/>
-    <result column="title" property="title" jdbcType="VARCHAR"/>
-    <result column="read_count" property="readCount" jdbcType="INTEGER"/>
     <result column="remark" property="remark" jdbcType="VARCHAR"/>
-    <result column="tag" property="tag" jdbcType="VARCHAR"/>
   </resultMap>
 
-  <resultMap id="ResultMapWithBLOBs" type="com.tim.eblog.post.po.Blog" extends="BaseResultMap">
+  <resultMap id="ResultMapWithBLOBs" type="com.tim.eblog.post.po.Dict" extends="BaseResultMap">
     <result column="content" property="content" jdbcType="LONGVARCHAR"/>
-  </resultMap>
-
-  <resultMap id="ArchiveSum" type="com.tim.eblog.post.vo.blog.ArchiveSum">
-    <result column="year" property="year" jdbcType="VARCHAR"/>
-    <result column="count" property="count" jdbcType="VARCHAR"/>
-  </resultMap>
-
-  <resultMap id="Archive" type="com.tim.eblog.post.vo.blog.Archive">
-    <result column="id" property="id" jdbcType="VARCHAR"/>
-    <result column="title" property="title" jdbcType="VARCHAR"/>
-    <result column="date" property="date" jdbcType="VARCHAR"/>
   </resultMap>
 
   <sql id="Example_Where_Clause">
@@ -93,9 +80,8 @@
   </sql>
 
   <sql id="Base_Column_List">
-    id
-    , create_time, creator_id, modified_time, modifier_id, title, read_count, remark,
-    tag
+    title
+    , id, create_time, creator_id, modified_time, modifier_id, remark
   </sql>
 
   <sql id="Blob_Column_List">
@@ -103,7 +89,7 @@
   </sql>
 
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs"
-    parameterType="com.tim.eblog.post.po.BlogExample">
+    parameterType="com.tim.eblog.post.po.DictExample">
     select
     <if test="distinct">
       distinct
@@ -112,7 +98,7 @@
     <include refid="Base_Column_List"/>
     ,
     <include refid="Blob_Column_List"/>
-    from blog
+    from dict
     <if test="_parameter != null">
       <include refid="Example_Where_Clause"/>
     </if>
@@ -122,22 +108,19 @@
   </select>
 
   <select id="selectByExample" resultMap="BaseResultMap"
-    parameterType="com.tim.eblog.post.po.BlogExample">
+    parameterType="com.tim.eblog.post.po.DictExample">
     select
     <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List"/>
-    from blog
+    from dict
     <if test="_parameter != null">
       <include refid="Example_Where_Clause"/>
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
-    </if>
-    <if test="limitRange != null">
-      limit ${limitRange}
     </if>
   </select>
 
@@ -146,38 +129,39 @@
     <include refid="Base_Column_List"/>
     ,
     <include refid="Blob_Column_List"/>
-    from blog
-    where id = #{id,jdbcType=VARCHAR}
+    from dict
+    where title = #{title,jdbcType=VARCHAR}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete
-    from blog
-    where id = #{id,jdbcType=VARCHAR}
+    from dict
+    where title = #{title,jdbcType=VARCHAR}
   </delete>
 
-  <delete id="deleteByExample" parameterType="com.tim.eblog.post.po.BlogExample">
-    delete from blog
+  <delete id="deleteByExample" parameterType="com.tim.eblog.post.po.DictExample">
+    delete from dict
     <if test="_parameter != null">
       <include refid="Example_Where_Clause"/>
     </if>
   </delete>
 
-  <insert id="insert" parameterType="com.tim.eblog.post.po.Blog">
-    insert into blog (id, create_time, creator_id,
-                      modified_time, modifier_id, title,
-                      read_count, remark, tag,
-                      content)
-    values (#{id,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=VARCHAR},
-            #{modifiedTime,jdbcType=TIMESTAMP}, #{modifierId,jdbcType=VARCHAR},
-            #{title,jdbcType=VARCHAR},
-            #{readCount,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR},
-            #{content,jdbcType=LONGVARCHAR})
+  <insert id="insert" parameterType="com.tim.eblog.post.po.Dict">
+    insert into dict (title, id, create_time,
+                      creator_id, modified_time, modifier_id,
+                      remark, content)
+    values (#{title,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+            #{creatorId,jdbcType=VARCHAR}, #{modifiedTime,jdbcType=TIMESTAMP},
+            #{modifierId,jdbcType=VARCHAR},
+            #{remark,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.tim.eblog.post.po.Blog">
-    insert into blog
+  <insert id="insertSelective" parameterType="com.tim.eblog.post.po.Dict">
+    insert into dict
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
       <if test="id != null">
         id,
       </if>
@@ -193,23 +177,17 @@
       <if test="modifierId != null">
         modifier_id,
       </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="readCount != null">
-        read_count,
-      </if>
       <if test="remark != null">
         remark,
-      </if>
-      <if test="tag != null">
-        tag,
       </if>
       <if test="content != null">
         content,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
@@ -225,17 +203,8 @@
       <if test="modifierId != null">
         #{modifierId,jdbcType=VARCHAR},
       </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="readCount != null">
-        #{readCount,jdbcType=INTEGER},
-      </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="tag != null">
-        #{tag,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
@@ -243,17 +212,20 @@
     </trim>
   </insert>
 
-  <select id="countByExample" parameterType="com.tim.eblog.post.po.BlogExample"
+  <select id="countByExample" parameterType="com.tim.eblog.post.po.DictExample"
     resultType="java.lang.Integer">
-    select count(*) from blog
+    select count(*) from dict
     <if test="_parameter != null">
       <include refid="Example_Where_Clause"/>
     </if>
   </select>
 
   <update id="updateByExampleSelective" parameterType="map">
-    update blog
+    update dict
     <set>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
@@ -269,17 +241,8 @@
       <if test="record.modifierId != null">
         modifier_id = #{record.modifierId,jdbcType=VARCHAR},
       </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.readCount != null">
-        read_count = #{record.readCount,jdbcType=INTEGER},
-      </if>
       <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
-      </if>
-      <if test="record.tag != null">
-        tag = #{record.tag,jdbcType=VARCHAR},
       </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
@@ -291,16 +254,14 @@
   </update>
 
   <update id="updateByExampleWithBLOBs" parameterType="map">
-    update blog
-    set id = #{record.id,jdbcType=VARCHAR},
+    update dict
+    set title = #{record.title,jdbcType=VARCHAR},
+    id = #{record.id,jdbcType=VARCHAR},
     create_time = #{record.createTime,jdbcType=TIMESTAMP},
     creator_id = #{record.creatorId,jdbcType=VARCHAR},
     modified_time = #{record.modifiedTime,jdbcType=TIMESTAMP},
     modifier_id = #{record.modifierId,jdbcType=VARCHAR},
-    title = #{record.title,jdbcType=VARCHAR},
-    read_count = #{record.readCount,jdbcType=INTEGER},
     remark = #{record.remark,jdbcType=VARCHAR},
-    tag = #{record.tag,jdbcType=VARCHAR},
     content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause"/>
@@ -308,24 +269,25 @@
   </update>
 
   <update id="updateByExample" parameterType="map">
-    update blog
-    set id = #{record.id,jdbcType=VARCHAR},
+    update dict
+    set title = #{record.title,jdbcType=VARCHAR},
+    id = #{record.id,jdbcType=VARCHAR},
     create_time = #{record.createTime,jdbcType=TIMESTAMP},
     creator_id = #{record.creatorId,jdbcType=VARCHAR},
     modified_time = #{record.modifiedTime,jdbcType=TIMESTAMP},
     modifier_id = #{record.modifierId,jdbcType=VARCHAR},
-    title = #{record.title,jdbcType=VARCHAR},
-    read_count = #{record.readCount,jdbcType=INTEGER},
-    remark = #{record.remark,jdbcType=VARCHAR},
-    tag = #{record.tag,jdbcType=VARCHAR}
+    remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.tim.eblog.post.po.Blog">
-    update blog
+  <update id="updateByPrimaryKeySelective" parameterType="com.tim.eblog.post.po.Dict">
+    update dict
     <set>
+      <if test="id != null">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -338,67 +300,37 @@
       <if test="modifierId != null">
         modifier_id = #{modifierId,jdbcType=VARCHAR},
       </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="readCount != null">
-        read_count = #{readCount,jdbcType=INTEGER},
-      </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="tag != null">
-        tag = #{tag,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where title = #{title,jdbcType=VARCHAR}
   </update>
 
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tim.eblog.post.po.Blog">
-    update blog
-    set create_time   = #{createTime,jdbcType=TIMESTAMP},
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tim.eblog.post.po.Dict">
+    update dict
+    set id            = #{id,jdbcType=VARCHAR},
+        create_time   = #{createTime,jdbcType=TIMESTAMP},
         creator_id    = #{creatorId,jdbcType=VARCHAR},
         modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
         modifier_id   = #{modifierId,jdbcType=VARCHAR},
-        title         = #{title,jdbcType=VARCHAR},
-        read_count    = #{readCount,jdbcType=INTEGER},
         remark        = #{remark,jdbcType=VARCHAR},
-        tag           = #{tag,jdbcType=VARCHAR},
         content       = #{content,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+    where title = #{title,jdbcType=VARCHAR}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.tim.eblog.post.po.Blog">
-    update blog
-    set create_time   = #{createTime,jdbcType=TIMESTAMP},
+  <update id="updateByPrimaryKey" parameterType="com.tim.eblog.post.po.Dict">
+    update dict
+    set id            = #{id,jdbcType=VARCHAR},
+        create_time   = #{createTime,jdbcType=TIMESTAMP},
         creator_id    = #{creatorId,jdbcType=VARCHAR},
         modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
         modifier_id   = #{modifierId,jdbcType=VARCHAR},
-        title         = #{title,jdbcType=VARCHAR},
-        read_count    = #{readCount,jdbcType=INTEGER},
-        remark        = #{remark,jdbcType=VARCHAR},
-        tag           = #{tag,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+        remark        = #{remark,jdbcType=VARCHAR}
+    where title = #{title,jdbcType=VARCHAR}
   </update>
-
-  <select id="selectArchiveSum" resultMap="ArchiveSum">
-    select YEAR(create_time) year, COUNT(*) count
-    from blog b
-    GROUP BY YEAR (create_time)
-    ORDER BY YEAR (create_time) desc
-  </select>
-
-  <select id="selectArchiveByYear" resultMap="Archive" parameterType="java.lang.String">
-    select b.id, b.title, DATE_FORMAT(b.create_time, '%m-%d') date
-    from blog b
-    where YEAR(create_time)=#{year,jdbcType=VARCHAR}
-  </select>
-
-  <select id="listTag" resultType="java.lang.String">
-    select tag from blog
-  </select>
 
 </mapper>
