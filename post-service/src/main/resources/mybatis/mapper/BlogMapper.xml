@@ -91,7 +91,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, create_time, creator_id, modified_time, modifier_id, title, read_count, remark,
+    id
+    , create_time, creator_id, modified_time, modifier_id, title, read_count, remark,
     tag
   </sql>
   <sql id="Blob_Column_List">
@@ -369,15 +370,18 @@
   <select id="selectArchiveSum" resultMap="ArchiveSum">
     select YEAR(create_time) year, COUNT(*) count
     from blog b
-    GROUP BY YEAR(create_time)
-    ORDER BY YEAR(create_time) desc
+    GROUP BY YEAR (create_time)
+    ORDER BY YEAR (create_time) desc
   </select>
 
   <select id="selectArchiveByYear" resultMap="Archive" parameterType="java.lang.String">
     select b.id, b.title, DATE_FORMAT(b.create_time, '%m-%d') date
     from blog b
-    where
-      YEAR(create_time)=#{year,jdbcType=VARCHAR}
+    where YEAR(create_time)=#{year,jdbcType=VARCHAR}
+  </select>
+
+  <select id="listTag" resultType="java.lang.String">
+    select tag from blog
   </select>
 
 </mapper>

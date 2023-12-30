@@ -41,4 +41,6 @@ public interface BlogMapper {
 
   List<Archive> selectArchiveByYear(@Param("year") String year);
 
+  List<String> listTag();
+
 }

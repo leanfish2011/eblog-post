@@ -65,16 +65,6 @@ public class BlogController {
     return Message.success(blogService.search(blogSearchReq));
   }
 
-  @ApiOperation(value = "查看归档总揽")
-  @RequestMapping(value = "/archive", method = RequestMethod.GET)
-  public Message<ArchiveSumData> selectArchiveSum() {
-    return Message.success(blogService.selectArchiveSum());
-  }
 
-  @ApiOperation(value = "按年份查看归档详情")
-  @RequestMapping(value = "/archive/{year}", method = RequestMethod.GET)
-  public Message<ArchiveData> selectArchiveByYear(@PathVariable String year) {
-    return Message.success(blogService.selectArchiveByYear(year));
-  }
 
 }

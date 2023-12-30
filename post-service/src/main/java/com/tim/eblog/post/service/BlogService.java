@@ -20,8 +20,5 @@ public interface BlogService {
 
   BlogResp select(String id);
 
-  ArchiveSumData selectArchiveSum();
-
-  ArchiveData selectArchiveByYear(String year);
 
 }
