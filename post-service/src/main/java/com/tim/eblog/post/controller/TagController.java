@@ -1,6 +1,7 @@
 package com.tim.eblog.post.controller;
 
 import com.tim.eblog.post.service.TagService;
+import com.tim.eblog.post.vo.blog.TagBlogData;
 import com.tim.message.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,5 +28,11 @@ public class TagController {
   @RequestMapping(value = "/tag", method = RequestMethod.GET)
   public Message<List<String>> listTag() {
     return Message.success(tagService.listTag());
+  }
+
+  @ApiOperation(value = "查看标签下的博客")
+  @RequestMapping(value = "/tag/blog", method = RequestMethod.GET)
+  public Message<List<TagBlogData>> queryTagBlog() {
+    return Message.success(tagService.queryTagBlog());
   }
 }

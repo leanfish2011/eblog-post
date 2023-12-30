@@ -1,5 +1,6 @@
 package com.tim.eblog.post.vo.blog;
 
+import java.util.Date;
 import lombok.Data;
 
 /**
@@ -8,7 +9,11 @@ import lombok.Data;
  * @description：
  */
 @Data
-public class Tag {
+public class TagBlog {
 
-  private String name;
+  private String id;
+
+  private String title;
+
+  private Date createTime;
 }

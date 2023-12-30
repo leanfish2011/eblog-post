@@ -9,7 +9,9 @@ import lombok.Data;
  * @description：
  */
 @Data
-public class TagData {
+public class TagBlogData {
 
-  private List<Tag> tagList;
+  private String tag;
+
+  private List<TagBlog> tagBlogList;
 }
