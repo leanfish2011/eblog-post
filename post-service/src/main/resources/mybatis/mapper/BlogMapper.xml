@@ -19,12 +19,12 @@
     <result column="content" property="content" jdbcType="LONGVARCHAR"/>
   </resultMap>
 
-  <resultMap id="ArchiveSum" type="com.tim.eblog.post.vo.blog.ArchiveSum">
+  <resultMap id="ArchiveSum" type="com.tim.eblog.post.vo.blog.archive.ArchiveSum">
     <result column="year" property="year" jdbcType="VARCHAR"/>
     <result column="count" property="count" jdbcType="VARCHAR"/>
   </resultMap>
 
-  <resultMap id="Archive" type="com.tim.eblog.post.vo.blog.Archive">
+  <resultMap id="Archive" type="com.tim.eblog.post.vo.blog.archive.Archive">
     <result column="id" property="id" jdbcType="VARCHAR"/>
     <result column="title" property="title" jdbcType="VARCHAR"/>
     <result column="date" property="date" jdbcType="VARCHAR"/>

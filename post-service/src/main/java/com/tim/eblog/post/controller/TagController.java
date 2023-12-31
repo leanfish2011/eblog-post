@@ -1,7 +1,7 @@
 package com.tim.eblog.post.controller;
 
 import com.tim.eblog.post.service.TagService;
-import com.tim.eblog.post.vo.blog.TagBlogData;
+import com.tim.eblog.post.vo.blog.tag.TagBlogData;
 import com.tim.message.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

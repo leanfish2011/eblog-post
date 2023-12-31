@@ -1,8 +1,8 @@
 package com.tim.eblog.post.controller;
 
 import com.tim.eblog.post.service.ArchiveService;
-import com.tim.eblog.post.vo.blog.ArchiveData;
-import com.tim.eblog.post.vo.blog.ArchiveSumData;
+import com.tim.eblog.post.vo.blog.archive.ArchiveData;
+import com.tim.eblog.post.vo.blog.archive.ArchiveSumData;
 import com.tim.message.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

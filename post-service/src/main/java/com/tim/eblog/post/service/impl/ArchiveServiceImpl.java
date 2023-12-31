@@ -2,10 +2,10 @@ package com.tim.eblog.post.service.impl;
 
 import com.tim.eblog.post.dao.BlogMapper;
 import com.tim.eblog.post.service.ArchiveService;
-import com.tim.eblog.post.vo.blog.Archive;
-import com.tim.eblog.post.vo.blog.ArchiveData;
-import com.tim.eblog.post.vo.blog.ArchiveSum;
-import com.tim.eblog.post.vo.blog.ArchiveSumData;
+import com.tim.eblog.post.vo.blog.archive.Archive;
+import com.tim.eblog.post.vo.blog.archive.ArchiveData;
+import com.tim.eblog.post.vo.blog.archive.ArchiveSum;
+import com.tim.eblog.post.vo.blog.archive.ArchiveSumData;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

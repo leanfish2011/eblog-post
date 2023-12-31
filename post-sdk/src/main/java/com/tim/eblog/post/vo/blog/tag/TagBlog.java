@@ -1,4 +1,4 @@
-package com.tim.eblog.post.vo.blog;
+package com.tim.eblog.post.vo.blog.tag;
 
 import java.util.Date;
 import lombok.Data;

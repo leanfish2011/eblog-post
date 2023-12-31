@@ -2,8 +2,8 @@ package com.tim.eblog.post.dao;
 
 import com.tim.eblog.post.po.Blog;
 import com.tim.eblog.post.po.BlogExample;
-import com.tim.eblog.post.vo.blog.Archive;
-import com.tim.eblog.post.vo.blog.ArchiveSum;
+import com.tim.eblog.post.vo.blog.archive.Archive;
+import com.tim.eblog.post.vo.blog.archive.ArchiveSum;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
