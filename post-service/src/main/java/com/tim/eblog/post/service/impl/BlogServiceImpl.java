@@ -63,6 +63,7 @@ public class BlogServiceImpl implements BlogService {
       BeanUtils.copyProperties(blog, blogSearchResp);
 
       blogSearchResp.setArrayTag(getTagArray(blog.getTag()));
+      blogSearchResp.setRemark(getRemarkShow(blog.getRemark()));
 
       list.add(blogSearchResp);
     }
@@ -124,6 +125,10 @@ public class BlogServiceImpl implements BlogService {
 
   private String getRemarkTip(String remark) {
     return remark.length() > 255 ? remark.substring(0, 255) : remark;
+  }
+
+  private String getRemarkShow(String remark) {
+    return remark.length() > 100 ? remark.substring(0, 100) + "..." : remark;
   }
 
   private String getTagStr(String[] arrayTag) {
