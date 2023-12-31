@@ -70,7 +70,7 @@ public class DictServiceImpl implements DictService {
       dictExample.setLimitRange((pageNo - 1) * pageSize + "," + pageSize);
     }
 
-    List<Dict> dictList = dictMapper.selectByExample(dictExample);
+    List<Dict> dictList = dictMapper.selectByExampleWithBLOBs(dictExample);
     List<DictSearchResp> list = new ArrayList<>();
     for (Dict dict : dictList) {
       DictSearchResp dictSearchResp = new DictSearchResp();
