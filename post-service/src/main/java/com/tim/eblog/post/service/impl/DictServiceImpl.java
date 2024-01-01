@@ -61,6 +61,9 @@ public class DictServiceImpl implements DictService {
       criteria.andTitleLike("%" + dictSearchReq.getTitle() + "%");
     }
 
+    // 后端数据字典页面单独处理简介
+    criteria.andTitleNotEqualTo("aboutMe");
+
     int allTotal = dictMapper.countByExample(dictExample);
 
     dictExample.setOrderByClause(" create_time desc");
